@@ -19,6 +19,5 @@ flutter run -d chrome
 flutter test            # все тесты
 flutter analyze         # линтеры
 ```
-- `test/lint_test.dart` — проверка линтеров (`flutter analyze --fatal-infos`)
 - `test/widget_test.dart` — проверка UI: пустое состояние, добавление задачи, валидация
 - `test/task_model_test.dart` — проверка модели Task (создание, toJson/fromJson)
