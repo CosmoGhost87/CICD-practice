@@ -32,8 +32,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Task> _tasks = [];
 
-  String _formatDate(DateTime date) =>
-      '${date.day.toString().padLeft(2, '0')}.'
+  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}.'
       '${date.month.toString().padLeft(2, '0')}.'
       '${date.year}';
 
@@ -81,8 +80,7 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (task.description.isNotEmpty)
-                          Text(task.description),
+                        if (task.description.isNotEmpty) Text(task.description),
                         Text('Срок: ${_formatDate(task.dueDate)}'),
                       ],
                     ),

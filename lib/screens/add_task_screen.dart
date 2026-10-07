@@ -49,8 +49,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     Navigator.of(context).pop(task);
   }
 
-  String _formatDate(DateTime date) =>
-      '${date.day.toString().padLeft(2, '0')}.'
+  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}.'
       '${date.month.toString().padLeft(2, '0')}.'
       '${date.year}';
 
