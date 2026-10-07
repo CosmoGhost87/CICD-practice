@@ -1,6 +1,8 @@
 name: CI/CD practice
 on:
   push:
+    branches: [ main, development, release ]
+  pull_request:
     branches: [ main ]
 jobs:
   test:
@@ -11,4 +13,6 @@ jobs:
         with:
           flutter-version: '3.41.x'
       - run: flutter pub get
-      - run: flutter test
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: flutter analyze
+      - run: flutter test --coverage
