@@ -49,6 +49,12 @@ class _HomePageState extends State<HomePage> {
     setState(() => _tasks.removeAt(index));
   }
 
+  void _toggleTask(int index) {
+    setState(() {
+      _tasks[index] = _tasks[index].copyWith(isDone: !_tasks[index].isDone);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,13 +82,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onDismissed: (_) => _removeTask(index),
                   child: ListTile(
-                    title: Text(task.title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (task.description.isNotEmpty) Text(task.description),
-                        Text('Срок: ${_formatDate(task.dueDate)}'),
-                      ],
+                    leading: Checkbox(
+                      key: Key('task_checkbox_$index'),
+                      value: task.isDone,
+                      onChanged: (_) => _toggleTask(index),
+                    ),
+                    title: Text(
+                      task.title,
+                      style: task.isDone
+                          ? const TextStyle(decoration: TextDecoration.lineThrough)
+                          : null,
                     ),
                   ),
                 );
