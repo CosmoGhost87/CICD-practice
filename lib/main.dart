@@ -41,6 +41,11 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  String _formatDate(DateTime date) =>
+      '${date.day.toString().padLeft(2, '0')}.'
+          '${date.month.toString().padLeft(2, '0')}.'
+          '${date.year}';
+
   void _removeTask(int index) {
     setState(() => _tasks.removeAt(index));
   }
@@ -86,10 +91,16 @@ class _HomePageState extends State<HomePage> {
                     title: Text(
                       task.title,
                       style: task.isDone
-                          ? const TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                            )
+                          ? const TextStyle(decoration: TextDecoration.lineThrough)
                           : null,
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (task.description.isNotEmpty)
+                          Text(task.description),
+                        Text('Срок: ${_formatDate(task.dueDate)}'),
+                      ],
                     ),
                   ),
                 );
