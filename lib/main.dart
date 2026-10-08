@@ -32,10 +32,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Task> _tasks = [];
 
-  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}.'
-      '${date.month.toString().padLeft(2, '0')}.'
-      '${date.year}';
-
   Future<void> _addTask() async {
     final task = await Navigator.of(context).push<Task>(
       MaterialPageRoute(builder: (_) => const AddTaskScreen()),
@@ -91,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                       task.title,
                       style: task.isDone
                           ? const TextStyle(
-                              decoration: TextDecoration.lineThrough)
+                              decoration: TextDecoration.lineThrough,)
                           : null,
                     ),
                   ),
