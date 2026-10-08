@@ -22,11 +22,11 @@ class Task {
 
   /// Returns a copy with the given fields replaced.
   Task copyWith({bool? isDone}) => Task(
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    isDone: isDone ?? this.isDone,
-  );
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        isDone: isDone ?? this.isDone,
+      );
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

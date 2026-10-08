@@ -90,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                     title: Text(
                       task.title,
                       style: task.isDone
-                          ? const TextStyle(decoration: TextDecoration.lineThrough)
+                          ? const TextStyle(
+                              decoration: TextDecoration.lineThrough)
                           : null,
                     ),
                   ),
