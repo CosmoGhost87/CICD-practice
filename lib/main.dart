@@ -32,6 +32,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Task> _tasks = [];
 
+  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}.'
+      '${date.month.toString().padLeft(2, '0')}.'
+      '${date.year}';
+
   Future<void> _addTask() async {
     final task = await Navigator.of(context).push<Task>(
       MaterialPageRoute(builder: (_) => const AddTaskScreen()),
@@ -41,18 +45,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}.'
-      '${date.month.toString().padLeft(2, '0')}.'
-      '${date.year}';
-
   void _removeTask(int index) {
     setState(() => _tasks.removeAt(index));
-  }
-
-  void _toggleTask(int index) {
-    setState(() {
-      _tasks[index] = _tasks[index].copyWith(isDone: !_tasks[index].isDone);
-    });
   }
 
   @override
@@ -82,19 +76,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onDismissed: (_) => _removeTask(index),
                   child: ListTile(
-                    leading: Checkbox(
-                      key: Key('task_checkbox_$index'),
-                      value: task.isDone,
-                      onChanged: (_) => _toggleTask(index),
-                    ),
-                    title: Text(
-                      task.title,
-                      style: task.isDone
-                          ? const TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                            )
-                          : null,
-                    ),
+                    title: Text(task.title),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
