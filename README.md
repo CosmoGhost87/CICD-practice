@@ -13,5 +13,3 @@
 flutter create --platforms=web .   # если нужно сгенерировать web/ заново
 flutter run -d chrome
 ```
-- `test/widget_test.dart` — проверка UI: пустое состояние, добавление задачи, валидация
-- `test/task_model_test.dart` — проверка модели Task (создание, toJson/fromJson)
