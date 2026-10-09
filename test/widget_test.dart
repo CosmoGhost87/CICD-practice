@@ -52,4 +52,38 @@ void main() {
     // Still on the add-task screen.
     expect(find.text('Новая задача'), findsOneWidget);
   });
+
+  testWidgets('AppBar shows 0/0 with no tasks', (tester) async {
+    await tester.pumpWidget(const TodoApp());
+    expect(find.text('Мои задачи (0/0)'), findsOneWidget);
+  });
+
+  testWidgets('AppBar updates counter when tasks added and toggled',
+      (tester) async {
+    await tester.pumpWidget(const TodoApp());
+
+    // Добавляем первую задачу
+    await tester.tap(find.byKey(const Key('add_task_button')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const Key('title_field')), 'Задача 1');
+    await tester.tap(find.byKey(const Key('save_button')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Мои задачи (0/1)'), findsOneWidget);
+
+    // Добавляем вторую
+    await tester.tap(find.byKey(const Key('add_task_button')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const Key('title_field')), 'Задача 2');
+    await tester.tap(find.byKey(const Key('save_button')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Мои задачи (0/2)'), findsOneWidget);
+
+    // Отмечаем первую выполненной
+    await tester.tap(find.byKey(const Key('task_checkbox_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Мои задачи (1/2)'), findsOneWidget);
+  });
 }
