@@ -55,10 +55,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  int get _doneCount => _tasks.where((t) => t.isDone).length;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Мои задачи')),
+      appBar: AppBar(
+        title: Text('Мои задачи ($_doneCount/${_tasks.length})'),
+      ),
       body: _tasks.isEmpty
           ? const Center(
               child: Text(
