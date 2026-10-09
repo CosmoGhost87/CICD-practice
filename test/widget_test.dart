@@ -10,7 +10,7 @@ void main() {
   testWidgets('app starts with an empty state', (tester) async {
     await tester.pumpWidget(const TodoApp());
 
-    expect(find.text('Мои задачи'), findsOneWidget);
+    expect(find.text('Мои задачи (0/0)'), findsOneWidget);
     expect(find.textContaining('Задач пока нет'), findsOneWidget);
     expect(find.byKey(const Key('add_task_button')), findsOneWidget);
   });
