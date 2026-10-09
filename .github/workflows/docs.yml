@@ -1,0 +1,33 @@
+name: Docs
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+
+      - run: flutter pub get
+
+      - name: Extract version
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - run: dart doc --output doc/api
+
+      - name: Deploy to gh-pages/${{ steps.ver.outputs.version }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: doc/api
+          destination_dir: ${{ steps.ver.outputs.version }}
+          keep_files: true
